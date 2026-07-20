@@ -1,0 +1,35 @@
+spring:
+  datasource:
+    master:
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresql://localhost:5432/postgres
+      username: postgres
+      password: 976034
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  data:
+    redis:
+      host: localhost
+      port: 6379
+logging:
+  level:
+    org.springframework.web: TRACE
+
+app:
+  tenants:
+    datasources:
+      auracommerce1:
+        url: jdbc:postgresql://localhost:5432/auracommerce1
+        username: postgres
+        password: 123456
+      auracommerce2:
+        url: jdbc:postgresql://localhost:5432/auracommerce2
+        username: postgres
+        password: 123456
+
+

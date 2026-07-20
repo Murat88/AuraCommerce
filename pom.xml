@@ -23,6 +23,8 @@
 	</developers>
 	<modules>
 		<module>core-shared</module>
+		<module>tenant</module>
+		<module>application</module>
 	</modules>
 	<scm>
 		<connection/>
