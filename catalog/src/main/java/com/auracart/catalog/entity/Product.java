@@ -8,7 +8,9 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.annotations.SQLRestriction;
+import org.hibernate.type.SqlTypes;
 
 import java.util.UUID;
 
@@ -19,7 +21,7 @@ import java.util.UUID;
 @Getter
 @Setter
 @Entity
-@Table(name = "products")
+@Table(name = "products",schema = "catalog")
 @SQLRestriction("status != 'ARCHIVED'")
 public class Product extends BaseEntity {
 
@@ -39,6 +41,7 @@ public class Product extends BaseEntity {
     private String description;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "product_type")
     private ProductType productType;
 
@@ -46,6 +49,7 @@ public class Product extends BaseEntity {
     private UUID taxClassId;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "status")
     private ProductStatus status;
 }

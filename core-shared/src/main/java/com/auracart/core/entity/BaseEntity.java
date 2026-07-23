@@ -38,8 +38,4 @@ public abstract class BaseEntity {
     @LastModifiedBy
     @Column(name = "updated_by")
     private String updatedBy;
-
-    @Version
-    @Column(name = "version")
-    private Long version;
 }

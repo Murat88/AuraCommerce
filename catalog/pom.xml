@@ -44,11 +44,21 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-        <!-- PostgreSQL ltree (categories.path) gibi özel tipler için Hypersistence Utils -->
+        <!-- NOT: PostgreSQL ltree (categories.path) için Hypersistence Utils kullanılıyordu,
+             ancak en güncel sürüm (hypersistence-utils-hibernate-63) bu projede kullanılan
+             Hibernate 7.4 ile org.hibernate.query.BindableType sınıfının kaldırılmış olması
+             nedeniyle uygulama başlangıcında NoClassDefFoundError'a yol açıyor
+             (HibernateTypesContributor ServiceLoader ile otomatik yükleniyor ve bu sınıfı
+             arıyor). Bu yüzden bağımlılık kaldırıldı; bunun yerine
+             com.auracart.catalog.entity.type.PostgreSQLLTreeType adlı yerel, hafif bir
+             Hibernate UserType implementasyonu kullanılıyor (bkz. Category.java). Bu sınıf
+             org.postgresql.util.PGobject kullandığından postgresql sürücüsü derleme
+             zamanında (provided) gerekiyor; asıl runtime bağımlılığı application modülünde
+             tanımlıdır. -->
         <dependency>
-            <groupId>io.hypersistence</groupId>
-            <artifactId>hypersistence-utils-hibernate-63</artifactId>
-            <version>3.9.11</version>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <scope>provided</scope>
         </dependency>
 
         <!-- Boilerplate Kodu Azaltmak İçin -->

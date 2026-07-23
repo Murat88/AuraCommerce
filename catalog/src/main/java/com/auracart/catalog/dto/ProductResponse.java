@@ -39,7 +39,7 @@ public record ProductResponse(
                 product.getDescription(),
                 product.getProductType(),
                 product.getStatus(),
-                product.getCreatedAt()
+                product.getInsertedAt()
         );
     }
 }

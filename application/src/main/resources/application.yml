@@ -26,10 +26,10 @@ app:
       auracommerce1:
         url: jdbc:postgresql://localhost:5432/auracommerce1
         username: postgres
-        password: 123456
+        password: 976034
       auracommerce2:
         url: jdbc:postgresql://localhost:5432/auracommerce2
         username: postgres
-        password: 123456
+        password: 976034
 
 

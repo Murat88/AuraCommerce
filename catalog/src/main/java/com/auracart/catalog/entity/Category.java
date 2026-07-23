@@ -1,7 +1,7 @@
 package com.auracart.catalog.entity;
 
+import com.auracart.catalog.entity.type.PostgreSQLLTreeType;
 import com.auracart.core.entity.BaseEntity;
-import io.hypersistence.utils.hibernate.type.basic.PostgreSQLLTreeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -15,11 +15,16 @@ import java.util.UUID;
 /**
  * Kategori (Category) bilgisi. Hiyerarşi PostgreSQL ltree tipi ile "path" kolonunda tutulur.
  * Soft delete için is_active flag'i kullanılır.
+ * <p>
+ * NOT: {@code path} alanı, Hibernate 7.4 ile uyumsuz olan Hypersistence Utils
+ * kütüphanesi yerine yerel {@link PostgreSQLLTreeType} (bkz. entity.type paketi) ile
+ * map edilir; bu, ltree kolonuna doğru JDBC tipiyle ({@code org.postgresql.util.PGobject})
+ * yazılmasını sağlar.
  */
 @Getter
 @Setter
 @Entity
-@Table(name = "categories")
+@Table(name = "categories",schema = "catalog")
 @SQLRestriction("is_active = true")
 public class Category extends BaseEntity {
 

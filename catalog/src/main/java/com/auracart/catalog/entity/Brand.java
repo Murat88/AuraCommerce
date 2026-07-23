@@ -14,7 +14,7 @@ import org.hibernate.annotations.SQLRestriction;
 @Getter
 @Setter
 @Entity
-@Table(name = "brands")
+@Table(name = "brands",schema = "catalog")
 @SQLRestriction("is_active = true")
 public class Brand extends BaseEntity {
 

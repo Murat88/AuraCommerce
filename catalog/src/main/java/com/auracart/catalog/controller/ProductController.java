@@ -22,12 +22,19 @@ import org.springframework.web.bind.annotation.RestController;
  * herhangi bir ek tenant bağlantısına gerek yoktur.
  */
 @RestController
-@RequestMapping("/api/v1/products")
-@RequiredArgsConstructor
+@RequestMapping("/api/v1/product/create")
+//@RequiredArgsConstructor
 public class ProductController {
 
     private final ProductCommandService productCommandService;
 
+    public ProductController(ProductCommandService service) {
+
+        System.out.println("ProductController created");
+
+        this.productCommandService = service;
+
+    }
     /**
      * Yeni bir ürün oluşturur.
      *

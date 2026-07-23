@@ -70,6 +70,7 @@ public class OutboxEvent {
     private String payload;
 
     @Enumerated(EnumType.STRING)
+    @JdbcTypeCode(SqlTypes.NAMED_ENUM)
     @Column(name = "status", nullable = false)
     private OutboxStatus status;
 
