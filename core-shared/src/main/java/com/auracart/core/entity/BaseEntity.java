@@ -24,12 +24,12 @@ public abstract class BaseEntity {
     private UUID id;
 
     @CreatedDate
-    @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createdAt;
+    @Column(name = "inserted_at", nullable = false, updatable = false)
+    private LocalDateTime insertedAt;
 
     @CreatedBy
-    @Column(name = "created_by", updatable = false)
-    private String createdBy;
+    @Column(name = "inserted_by", updatable = false)
+    private String insertedBy;
 
     @LastModifiedDate
     @Column(name = "updated_at")

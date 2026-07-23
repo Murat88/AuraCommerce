@@ -32,6 +32,18 @@
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+        <!-- REST Controller katmanı için (@RestController, @RequestMapping vb.) -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <!-- Jakarta Validation (@Valid, @NotBlank, @NotNull vb.) için -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
+
         <!-- PostgreSQL ltree (categories.path) gibi özel tipler için Hypersistence Utils -->
         <dependency>
             <groupId>io.hypersistence</groupId>

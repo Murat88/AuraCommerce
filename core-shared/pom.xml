@@ -27,6 +27,18 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
+        <!-- Outbox payload alanı (jsonb) Hibernate'in native @JdbcTypeCode(SqlTypes.JSON)
+             desteği ile map edilir. NOT: hypersistence-utils-hibernate-63 (en güncel
+             sürüm), bu projede kullanılan Hibernate 7.4 ile org.hibernate.query.BindableType
+             sınıfının kaldırılması nedeniyle derleme zamanında uyumsuzdur; bu yüzden
+             burada eklenmemiştir (bkz. catalog modülü, ltree için hâlâ kullanıyor). -->
+
+        <!-- OutboxEventListener'ların event payload'unu JSON'a serileştirmesi için -->
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+
         <!-- Boilerplate Kodu Azaltmak İçin -->
         <dependency>
             <groupId>org.projectlombok</groupId>
