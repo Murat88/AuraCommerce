@@ -2,9 +2,12 @@ package com.auracart.catalog.controller;
 
 import com.auracart.catalog.dto.CreateProductRequest;
 import com.auracart.catalog.dto.ProductResponse;
-import com.auracart.catalog.entity.Product;
 import com.auracart.catalog.service.CreateProductCommand;
-import com.auracart.catalog.service.ProductCommandService;
+import com.auracart.catalog.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -14,36 +17,22 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- * Ürün (Product) kaynağı için REST API uç noktalarını sunar.
- * <p>
- * Tenant yönlendirmesi {@code TenantInterceptor} tarafından request seviyesinde
- * (X-Tenant-ID header'ı üzerinden) örtük olarak yönetildiği için burada
- * herhangi bir ek tenant bağlantısına gerek yoktur.
- */
 @RestController
 @RequestMapping("/api/v1/product/create")
-//@RequiredArgsConstructor
+@RequiredArgsConstructor
+@Tag(name = "Product", description = "Ürün (Product) kaynağı için REST API uç noktaları")
 public class ProductController {
 
-    private final ProductCommandService productCommandService;
+    private final ProductService productService;
 
-    public ProductController(ProductCommandService service) {
-
-        System.out.println("ProductController created");
-
-        this.productCommandService = service;
-
-    }
-    /**
-     * Yeni bir ürün oluşturur.
-     *
-     * @param request istemciden gelen ürün oluşturma isteği
-     * @return oluşturulan ürünü temsil eden {@link ProductResponse}, 201 Created ile birlikte
-     */
     @PostMapping
+    @Operation(summary = "Yeni ürün oluşturur", description = "Verilen bilgilerle aktif tenant veritabanında yeni bir ürün oluşturur.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "201", description = "Ürün başarıyla oluşturuldu"),
+            @ApiResponse(responseCode = "400", description = "Geçersiz istek gövdesi")
+    })
     public ResponseEntity<ProductResponse> createProduct(@Valid @RequestBody CreateProductRequest request) {
-        CreateProductCommand command = new CreateProductCommand(
+        var command = new CreateProductCommand(
                 request.categoryId(),
                 request.brandId(),
                 request.name(),
@@ -53,9 +42,9 @@ public class ProductController {
                 request.status()
         );
 
-        Product createdProduct = productCommandService.createProduct(command);
+        var createdProduct = productService.createProduct(command);
 
-        ProductResponse response = ProductResponse.from(createdProduct);
+        var response = ProductResponse.from(createdProduct);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

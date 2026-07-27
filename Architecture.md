@@ -42,6 +42,10 @@ When writing code for this project, AI assistants MUST follow these rules:
 17. **Service methods should validate input parameters** and throw appropriate exceptions (e.g., `IllegalArgumentException`) for invalid data.
 18. **All exceptions must be handled gracefully**. Use `@ControllerAdvice` for global exception handling and return meaningful error responses.
 19. **All public APIs must be documented** using OpenAPI/Swagger annotations.
+20. **Validate methods inside service classes should check for null or invalid inputs and must not check for business rules**. Business rules should be enforced in the service methods themselves, not in validation methods.
+21. **If it is mandatory to create an entity class or another class from another dto.If possible use mapper classes to map between them. Do not create entity classes directly from dto classes.**
+22. **Use 'var' for object definition if possible. Sample: var product = new CustomType() instead of CustomType product = new CustomType()**
+23. **Do not use comments(especially javadoc) a lot in the code. Use comments only if it is necessary to explain a complex logic.**
 ---
 
 ## 6. Single Source of Truth: Database Schema (DBML)
