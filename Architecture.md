@@ -29,7 +29,19 @@ When writing code for this project, AI assistants MUST follow these rules:
 4.  **Soft Deletes**: Use active/inactive flags (e.g., `is_active`) or status Enums instead of hard `DELETE` queries, unless explicitly requested.
 5.  **Audit Logs**: Critical changes should be tracked in the `audit_logs` table.
 6.  **AI Readiness**: Recognize that vector embeddings (`pgvector`) are used in the DB (`ai_embeddings`, `preferences_embedding`).
-
+7.  **Controller classes must not contain business logic**. They should delegate to Service classes
+8.  **Service classes must not contain persistence logic**. They should delegate to Repository classes.
+9.  **Repository classes must not contain business logic**. They should only handle data access.
+10. **No direct SQL queries** in Service classes. Use Spring Data JPA repositories or custom repository methods.
+11. **No cross-module database access**. Services in one module must not query entities from another module's database.
+12. **No hardcoded configuration values**. Use `application.yml` or `@Value` injection for all configurable parameters.
+13. **No business logic in the `core-shared` module**. It is strictly for shared infrastructure, not domain logic.
+14. **No direct access to `TenantContext` in Repository classes**. Repositories should be agnostic of tenant context; the routing is handled by Spring's `AbstractRoutingDataSource`.
+15. **No use of `@Transactional` in Controller classes**. Transaction boundaries should be defined in Service classes.
+16. **No use of `@Autowired` on fields**. Use constructor injection for all dependencies.
+17. **Service methods should validate input parameters** and throw appropriate exceptions (e.g., `IllegalArgumentException`) for invalid data.
+18. **All exceptions must be handled gracefully**. Use `@ControllerAdvice` for global exception handling and return meaningful error responses.
+19. **All public APIs must be documented** using OpenAPI/Swagger annotations.
 ---
 
 ## 6. Single Source of Truth: Database Schema (DBML)
