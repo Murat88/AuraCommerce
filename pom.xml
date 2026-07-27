@@ -12,27 +12,12 @@
 	<artifactId>root</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name/>
-	<description/>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
 	<modules>
 		<module>core-shared</module>
 		<module>tenant</module>
 		<module>application</module>
 		<module>catalog</module>
 	</modules>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
 	<properties>
 		<java.version>21</java.version>
 	</properties>
@@ -48,10 +33,5 @@
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
-
-	<build>
-		<plugins>
-		</plugins>
-	</build>
 
 </project>
