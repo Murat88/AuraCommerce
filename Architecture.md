@@ -46,6 +46,7 @@ When writing code for this project, AI assistants MUST follow these rules:
 21. **If it is mandatory to create an entity class or another class from another dto.If possible use mapper classes to map between them. Do not create entity classes directly from dto classes.**
 22. **Use 'var' for object definition if possible. Sample: var product = new CustomType() instead of CustomType product = new CustomType()**
 23. **Do not use comments(especially javadoc) a lot in the code. Use comments only if it is necessary to explain a complex logic.**
+24. **Distinguish business logics with packages and classes. For example, if you have a business logic related to product, create a package named product and put all the classes related to product in that package.Do this distinction for controllers,dto,entities,services and repositories**
 ---
 
 ## 6. Single Source of Truth: Database Schema (DBML)
