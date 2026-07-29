@@ -1,10 +1,22 @@
 spring:
+  config:
+    import: "vault://"
+  cloud:
+    vault:
+      uri: http://localhost:8200
+      # TODO: dev-only token auth with a hardcoded fallback default. Before any non-local
+      #       deployment, switch to AppRole/Kubernetes auth and remove the ":myroot" default -
+      #       do not commit real tokens here, rely on the VAULT_TOKEN env var only.
+      token: ${VAULT_TOKEN:myroot}
+      kv:
+        enabled: true
+        backend: secret
+        default-context: auracart-application
+        application-name: auracart-application
   datasource:
     master:
       driver-class-name: org.postgresql.Driver
       url: jdbc:postgresql://localhost:5432/postgres
-      username: postgres
-      password: 976034
   jpa:
     show-sql: true
     hibernate:
@@ -25,11 +37,6 @@ app:
     datasources:
       auracommerce1:
         url: jdbc:postgresql://localhost:5432/auracommerce1
-        username: postgres
-        password: 976034
       auracommerce2:
         url: jdbc:postgresql://localhost:5432/auracommerce2
-        username: postgres
-        password: 976034
-
 

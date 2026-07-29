@@ -20,7 +20,52 @@
 	</modules>
 	<properties>
 		<java.version>21</java.version>
+		<!-- TODO: spring-cloud-dependencies GA (2025.0.x) is not compatible with Spring Boot 4.1
+		     (NoSuchMethodError on ConfigDataLocationResolverContext.getBootstrapContext()).
+		     Using this SNAPSHOT train (2025.1.x) as a temporary bridge until a Boot-4.1-compatible
+		     GA release ships. Swap to the GA version and remove the spring-snapshots repositories
+		     below once available - SNAPSHOTs can change/disappear without notice and should not
+		     be relied on in production. -->
+		<spring-cloud.version>2025.1.3-SNAPSHOT</spring-cloud.version>
 	</properties>
+	<!-- TODO: remove these snapshot repositories once spring-cloud.version above is pinned to a GA release -->
+	<repositories>
+		<repository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</repository>
+	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>spring-snapshots</id>
+			<name>Spring Snapshots</name>
+			<url>https://repo.spring.io/snapshot</url>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+		</pluginRepository>
+	</pluginRepositories>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
